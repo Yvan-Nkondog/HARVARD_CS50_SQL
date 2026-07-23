@@ -6,4 +6,15 @@
 
 -- Uses cyberchase.db
 
-
+SELECT DISTINCT
+    strftime('%Y', "air_date") AS "Year", 
+    strftime('%m-%d', "air_date") AS "Month-Day"
+FROM "episodes"
+WHERE "air_date" IN (
+    -- Internal SQL query to obtain the earliest date
+    -- value for each year.
+    SELECT MIN("air_date")
+    FROM "episodes"
+    GROUP BY strftime('%Y', air_date)
+)
+ORDER BY strftime('%Y', "air_date") DESC;  
