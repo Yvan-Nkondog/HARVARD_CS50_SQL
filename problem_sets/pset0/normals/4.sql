@@ -3,3 +3,5 @@
 
 -- Uses normals.db
 
+SELECT MIN("0m")
+FROM "normals";
