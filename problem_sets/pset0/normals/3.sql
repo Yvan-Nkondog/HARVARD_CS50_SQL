@@ -7,3 +7,14 @@
 
 -- Uses normals.db
 
+-- The location corresponding to the "id" at the middle of
+-- the normals.db has been selected. Six columns have
+-- been displayed.
+
+SELECT "id", "latitude", "longitude", "0m", "100m", "200m"
+FROM "normals"
+WHERE "id" = (
+    SELECT COUNT(*) / 2 
+    FROM "normals"
+    );
+
