@@ -5,4 +5,4 @@
 
 SELECT "id"
 FROM "players"
-WHERE "debut" IS NULL
+WHERE "debut" IS NULL;
