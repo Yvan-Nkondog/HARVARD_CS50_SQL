@@ -4,7 +4,7 @@
 -- Finds all books published by MacLehose Press, with hard-coded id
 SELECT "id" FROM "publishers" WHERE "publisher" = 'MacLehose Press';
 
-SELECT "title" FROM "books" WHERE "publisher_id" = 12;
+SELECT "title" FROM "books" WHERE CAST("publisher_id" AS INTEGER) = 12;
 
 -- Finds all books published by MacLehose Press, with a nested query
 SELECT "title" FROM "books" WHERE "publisher_id" = (
