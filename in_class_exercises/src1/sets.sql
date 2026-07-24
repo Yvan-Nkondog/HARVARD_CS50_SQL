@@ -9,7 +9,7 @@ SELECT 'author' AS "profession", "name" FROM "authors";
 SELECT 'translator' AS "profession", "name" FROM "translators";
 
 -- Combines authors and translators into one result set
-SELECT 'author' AS "profession", "name" FROM "authors";
+SELECT 'author' AS "profession", "name" FROM "authors"
 UNION
 SELECT 'translator' AS "profession", "name" FROM "translators";
 
@@ -39,7 +39,7 @@ SELECT "book_id" FROM "translated" WHERE "translator_id" = (
 );
 
 -- Finds intersection of books
-SELECT "title" FROM "books" WHERE "id" = (
+SELECT "title", "id" FROM "books" WHERE "id" = (
     SELECT "book_id" FROM "translated" WHERE "translator_id" = (
     SELECT "id" FROM "translators" WHERE name = 'Sophie Hughes'
     )
