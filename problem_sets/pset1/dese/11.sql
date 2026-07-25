@@ -1,10 +1,13 @@
--- Your colleague is preparing a map of all public schools 
--- in Massachusetts. In 1.sql, write a SQL query to find the 
--- names and cities of all public schools in Massachusetts.
+-- Is there a relationship between school expenditures 
+-- and graduation rates? In 11.sql, write a SQL query 
+-- to display the names of schools, their per-pupil expenditure, 
+-- and their graduation rate. Sort the schools from greatest 
+-- per-pupil expenditure to least. If two schools have the same
+-- per-pupil expenditure, sort by school name.
 
--- Keep in mind that not all schools in the schools table are 
--- considered traditional public schools. Massachusetts also 
--- recognizes charter schools, which (according to DESE!) 
--- are considered distinct.
+-- You should assume a school spends the same amount 
+-- per-pupil their district as a whole spends.
 
 -- Uses dese.db
+
+

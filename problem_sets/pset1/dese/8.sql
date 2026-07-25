@@ -1,10 +1,8 @@
--- Your colleague is preparing a map of all public schools 
--- in Massachusetts. In 1.sql, write a SQL query to find the 
--- names and cities of all public schools in Massachusetts.
-
--- Keep in mind that not all schools in the schools table are 
--- considered traditional public schools. Massachusetts also 
--- recognizes charter schools, which (according to DESE!) 
--- are considered distinct.
+-- A parent wants to send their child to a district with many 
+-- other students. In 8.sql, write a SQL query to display the 
+-- names of all school districts and the number of pupils 
+-- enrolled in each.
 
 -- Uses dese.db
+
+
