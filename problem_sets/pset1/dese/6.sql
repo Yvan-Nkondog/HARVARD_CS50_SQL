@@ -12,4 +12,3 @@ WHERE "id" IN (
     FROM "graduation_rates"
     WHERE "graduated" = 100
 );
-
