@@ -7,3 +7,12 @@
 -- expenditure for each.
 
 -- Uses dese.db
+
+SELECT "name", "per_pupil_expenditure"
+FROM (
+    SELECT *
+    FROM "districts"
+    JOIN "expenditures" ON "expenditures"."district_id" = "districts"."id"
+)
+ORDER BY "per_pupil_expenditure" DESC
+LIMIT 10;
