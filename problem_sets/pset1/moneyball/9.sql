@@ -4,8 +4,20 @@
 --     Round the average salary column to two decimal places and call 
 --     it “average salary”.
 --     Sort the teams by average salary, least to greatest.
---     Your query should return a table with two columns, one for the teams’ names and one for their average salary.
+--     Your query should return a table with two columns, one for the teams’ 
+--     names and one for their average salary.
 
 -- Uses moneyball.db
 
-
+SELECT
+    "name", 
+    ROUND(AVG("salary"), 2) AS "average salary"
+FROM (
+    SELECT *
+    FROM "teams"
+    JOIN "salaries" ON "salaries"."team_id" = "teams"."id"
+)
+WHERE "year" = 2001
+GROUP BY "name"
+ORDER BY "average salary" ASC
+LIMIT 5;
