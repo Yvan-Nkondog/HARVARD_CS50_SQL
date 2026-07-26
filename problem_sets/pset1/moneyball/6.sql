@@ -10,3 +10,19 @@
 
 -- Uses moneyball.db
 
+SELECT 
+    "name",
+    SUM("H") AS "total hits"
+FROM (
+    SELECT *
+    FROM "performances"
+    JOIN "teams" ON "teams"."id" = "performances"."team_id"
+)
+WHERE "year" = 2001
+GROUP BY "team_id"
+ORDER BY "total hits" DESC
+LIMIT 5;
+
+-- Note : It has been assumed that the same team can be selected
+-- many times, based on the total number of hits .
+-- Hence, << SELECT DISTINCT "teams" >> has not been used.
