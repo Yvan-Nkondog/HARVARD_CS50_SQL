@@ -51,5 +51,14 @@
 
 -- Uses moneyball.db
 
-
-
+SELECT 
+    "first_name", "last_name", "salary", "HR", "year"
+FROM (
+    SELECT *
+    FROM "players"
+    JOIN "salaries" ON "salaries"."player_id" = "players"."id" 
+    JOIN "performances" 
+        ON "salaries"."player_id" = "performances"."player_id"
+        AND "salaries"."year" = "performances"."year"
+)
+ORDER BY "player_id" ASC, "year" DESC, "HR" DESC, "salary" DESC;
