@@ -15,29 +15,49 @@
 
 -- Uses moneyball.db
 
-SELECT * FROM "performances" LIMIT 1;
-SELECT * FROM "players" LIMIT 1;
-SELECT * FROM "salaries" LIMIT 1;
-SELECT * FROM "teams" LIMIT 1;
+-- First query to select rows according to increasing "dollars per hit".
+SELECT "first_name", "last_name"
+FROM (
+    SELECT
+    "first_name",
+    "last_name",
+    CASE
+        WHEN "H" != 0 THEN ROUND ("salary" * 1.0 / "H", 2)
+        ELSE NULL
+    END AS "dollars per hit" 
+    FROM "players"
+    JOIN "performances" ON "players"."id" = "performances"."player_id"
+    JOIN "salaries" ON "salaries"."player_id" = "performances"."player_id"
+    AND "salaries"."year" = "performances"."year"
+    WHERE "H" != 0 
+    AND "performances"."year" = 2001
+    ORDER BY "dollars per hit" ASC
+    LIMIT 10
+)
 
-SELECT
+-- Intersection point between the first and second query.
+INTERSECT 
+
+-- Second query to select rows according to increasing "dollars per RBI".
+SELECT "first_name", "last_name"
+FROM (
+    SELECT
    "first_name",
    "last_name",
-   "players"."id",
-   CASE
-      WHEN "H" != 0 THEN ROUND ("salary" * 1.0 / "H", 2)
-      ELSE NULL
-    END AS "dollars per hit",
     CASE
-      WHEN "RBI" != 0 THEN ROUND ("salary" * 1.0 / "RBI", 2)
-      ELSE NULL
+        WHEN "RBI" != 0 THEN ROUND ("salary" * 1.0 / "RBI", 2)
+        ELSE NULL
     END AS "dollars per RBI" 
-FROM "players"
-JOIN "performances" ON "players"."id" = "performances"."player_id"
-JOIN "salaries" ON "salaries"."player_id" = "performances"."player_id"
-AND "salaries"."year" = "performances"."year"
-WHERE "H" != 0 
-AND "RBI" != 0 
-AND "salaries"."year" = 2001
-ORDER BY "salaries"."player_id" ASC, "last_name" ASC
-LIMIT 10;
+    FROM "players"
+    JOIN "performances" ON "players"."id" = "performances"."player_id"
+    JOIN "salaries" ON "salaries"."player_id" = "performances"."player_id"
+    AND "salaries"."year" = "performances"."year"
+    WHERE "RBI" != 0 
+    AND "performances"."year" = 2001
+    ORDER BY "dollars per RBI" ASC
+    LIMIT 10
+)
+
+-- After intersection of fist and second queries, 
+-- order the result according to last_name.
+ORDER BY "last_name" ASC
