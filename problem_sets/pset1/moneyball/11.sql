@@ -19,3 +19,18 @@
 
 -- Uses moneyball.db
 
+SELECT
+    "first_name",
+    "last_name",
+    CASE 
+        WHEN "H" != 0 THEN ROUND ("salary" * 1.0 / "H", 2)
+        ELSE NULL
+    END AS "dollars per hit" 
+FROM "players"
+JOIN "performances" ON "players"."id" = "performances"."player_id"
+JOIN "salaries" ON "salaries"."player_id" = "performances"."player_id"
+AND "salaries"."year" = "performances"."year"
+WHERE "H" != 0 
+AND "salaries"."year" = 2001
+ORDER BY "dollars per hit" ASC, "first_name" ASC, "last_name" ASC
+LIMIT 10;
