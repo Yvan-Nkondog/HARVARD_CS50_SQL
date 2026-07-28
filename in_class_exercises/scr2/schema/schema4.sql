@@ -1,6 +1,7 @@
 -- Uses creating_taables.db database.
 
--- To demonstrate how to add primary and foreign key table constraints.
+-- To demonstrate how update schema to
+-- represent CharlieCard.
 
 -- Start by deleting prior tables, if they
 -- exist.
@@ -12,22 +13,26 @@ DROP TABLE IF EXISTS "swipes";
 DROP TABLE IF EXISTS "cards";
 
 -- Creates tables with updated schema
-CREATE TABLE "riders" (
+CREATE TABLE "cards" (
     "id" INTEGER,
-    "name" TEXT,
     PRIMARY KEY("id")
 );
 
 CREATE TABLE "stations" (
     "id" INTEGER,
-    "name" TEXT,
-    "line" TEXT,
+    "name" TEXT NOT NULL UNIQUE,
+    "line" TEXT NOT NULL,
     PRIMARY KEY("id")
 );
 
-CREATE TABLE "visits" (
-    "rider_id" INTEGER,
+CREATE TABLE "swipes" (
+    "id" INTEGER,
+    "card_id" INTEGER,
     "station_id" INTEGER,
-    FOREIGN KEY("rider_id") REFERENCES "riders"("id"),
-    FOREIGN KEY("station_id") REFERENCES "stations"("id")
+    "type" TEXT,
+    "datetime" NUMERIC,
+    "amount" NUMERIC,
+    PRIMARY KEY("id"),
+    FOREIGN KEY("station_id") REFERENCES "stations"("id"),
+    FOREIGN KEY("card_id") REFERENCES "cards"("id")
 );

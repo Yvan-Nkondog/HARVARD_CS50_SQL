@@ -1,6 +1,7 @@
 -- Uses creating_taables.db database.
 
--- To demonstrate how add type affinities
+-- To demonstrate how to add 
+-- UNIQUE, NOT NULL as column constraints
 
 -- Start by deleting prior tables, if they
 -- exist.
@@ -14,16 +15,20 @@ DROP TABLE IF EXISTS "cards";
 -- Creates tables with updated schema
 CREATE TABLE "riders" (
     "id" INTEGER,
-    "name" TEXT
+    "name" TEXT,
+    PRIMARY KEY("id")
 );
 
 CREATE TABLE "stations" (
     "id" INTEGER,
-    "name" TEXT,
-    "line" TEXT
+    "name" TEXT NOT NULL UNIQUE,
+    "line" TEXT NOT NULL,
+    PRIMARY KEY("id")
 );
 
 CREATE TABLE "visits" (
     "rider_id" INTEGER,
-    "station_id" INTEGER
+    "station_id" INTEGER,
+    FOREIGN KEY("rider_id") REFERENCES "riders"("id"),
+    FOREIGN KEY("station_id") REFERENCES "stations"("id")
 );
