@@ -1,7 +1,6 @@
--- Uses creating_taables.db database.
+-- Uses creating_tables.db database.
 
--- To demonstrate how to create a table
--- name schema
+-- To demonstrate how to create a table.
 
 -- Start by deleting prior tables, if they
 -- exist.

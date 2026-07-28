@@ -1,6 +1,6 @@
--- Uses creating_taables.db database.
+-- Uses creating_tables.db database.
 
--- To demonstrate how add type affinities
+-- To demonstrate how add type affinities.
 
 -- Start by deleting prior tables, if they
 -- exist.

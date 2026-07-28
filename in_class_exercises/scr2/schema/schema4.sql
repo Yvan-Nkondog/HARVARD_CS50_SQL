@@ -1,4 +1,4 @@
--- Uses creating_taables.db database.
+-- Uses creating_tables.db database.
 
 -- To demonstrate how update schema to
 -- represent CharlieCard.
