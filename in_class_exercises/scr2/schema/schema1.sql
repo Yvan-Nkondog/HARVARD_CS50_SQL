@@ -12,21 +12,19 @@ DROP TABLE IF EXISTS "visits";
 DROP TABLE IF EXISTS "swipes";
 DROP TABLE IF EXISTS "cards";
 
--- Create three tables without specified
--- type / affinities.
-
+-- Creates tables with updated schema
 CREATE TABLE "riders" (
-    "id",
-    "name"
+    "id" INTEGER,
+    "name" TEXT
 );
 
 CREATE TABLE "stations" (
-    "id",
-    "name",
-    "line"
+    "id" INTEGER,
+    "name" TEXT,
+    "line" TEXT
 );
 
 CREATE TABLE "visits" (
-    "rider_id",
-    "station_id"
+    "rider_id" INTEGER,
+    "station_id" INTEGER
 );
