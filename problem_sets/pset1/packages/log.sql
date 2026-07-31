@@ -1,3 +1,4 @@
+-- PART 1
 -- *** The Lost Letter ***
 
 -- It has clearly been mentionned that the destination
@@ -23,7 +24,7 @@ ORDER BY "address" ASC;
 -- │  ... │                                 │      ...    │
 
 
--- Obtain the ID and type of departure address.
+-- Obtain the ID and type of sender's address.
 -- ID = 432, type = Residential.
 SELECT *
 FROM "addresses"
@@ -70,6 +71,8 @@ WHERE "package_id" = 384;
 
 
 
+
+-- PART 2
 -- *** The Devious Delivery ***
 
 -- One important information mentionned is that the
@@ -79,7 +82,7 @@ WHERE "package_id" = 384;
 SELECT *
 FROM "packages"
 WHERE "from_address_id" IS NULL;
--- Output :
+-- Output (only one package):
 -- ╭──────┬───────────────┬─────────────────┬───────────────╮
 -- │  id  │   contents    │ from_address_id │ to_address_id │
 -- ╞══════╪═══════════════╪═════════════════╪═══════════════╡
@@ -91,12 +94,14 @@ WHERE "from_address_id" IS NULL;
 SELECT *
 FROM "scans"
 WHERE "package_id" = 5098;
+-- Output :
 -- ╭───────┬───────────┬────────────┬────────────┬────────┬────────────────────────────╮
 -- │  id   │ driver_id │ package_id │ address_id │ action │         timestamp          │
 -- ╞═══════╪═══════════╪════════════╪════════════╪════════╪════════════════════════════╡
 -- │ 30123 │        10 │       5098 │         50 │ Pick   │ 2023-10-24 08:40:16.246648 │
 -- │ 30140 │        10 │       5098 │        348 │ Drop   │ 2023-10-24 10:08:55.610754 │
 -- ╰───────┴───────────┴────────────┴────────────┴────────┴────────────────────────────╯
+
 
 SELECT *
 FROM "addresses"
@@ -116,5 +121,90 @@ WHERE "id" = 50 OR "id" = 348;
 -- According to the "scans" table, the package has left from address_id
 -- 50, which corresponds to 123 Sesame Street, a "Residential" address.
 
+
+
+
+-- PART 3
 -- *** The Forgotten Gift ***
 
+-- Select the sending and the destination addresses.
+-- "ORDER BY" add in order to keep the sending address
+-- before the destination address.
+SELECT *
+FROM "addresses"
+WHERE "address" = '109 Tileston Street'
+OR "address" = '728 Maple Place'
+ORDER BY "address" ASC;
+-- Output :
+-- ╭──────┬─────────────────────┬─────────────╮
+-- │  id  │       address       │    type     │
+-- ╞══════╪═════════════════════╪═════════════╡
+-- │ 9873 │ 109 Tileston Street │ Residential │
+-- │ 4983 │ 728 Maple Place     │ Residential │
+-- ╰──────┴─────────────────────┴─────────────╯
+
+
+-- Identify the package (and its content) using the 
+-- sender's address and destination address.
+SELECT *
+FROM "packages"
+WHERE "from_address_id" = 9873
+AND "to_address_id" = 4983;
+-- Output :
+-- ╭──────┬──────────┬─────────────────┬───────────────╮
+-- │  id  │ contents │ from_address_id │ to_address_id │
+-- ╞══════╪══════════╪═════════════════╪═══════════════╡
+-- │ 9523 │ Flowers  │            9873 │          4983 │
+-- ╰──────┴──────────┴─────────────────┴───────────────╯
+
+-- Content : Flowers, package id : 9523.
+
+
+-- Select, from "scans", the package corresponding to the
+-- package id.
+SELECT *
+FROM "scans"
+WHERE "package_id" = 9523;
+-- Output :
+-- ╭───────┬───────────┬────────────┬────────────┬────────┬────────────────────────────╮
+-- │  id   │ driver_id │ package_id │ address_id │ action │         timestamp          │
+-- ╞═══════╪═══════════╪════════════╪════════════╪════════╪════════════════════════════╡
+-- │ 10432 │        11 │       9523 │       9873 │ Pick   │ 2023-08-16 21:41:43.219831 │
+-- │ 10500 │        11 │       9523 │       7432 │ Drop   │ 2023-08-17 03:31:36.856889 │
+-- │ 12432 │        17 │       9523 │       7432 │ Pick   │ 2023-08-23 19:41:47.913410 │
+-- ╰───────┴───────────┴────────────┴────────────┴────────┴────────────────────────────╯
+
+-- The package has not been dropped at the correct address (4983). The package has been
+-- picked from the wrong address but has not been dropped at another address.
+
+
+-- Get information about the driver.
+SELECT *
+FROM "drivers"
+WHERE "id" = 11;
+-- Output : 
+-- ╭────┬────────╮
+-- │ id │  name  │
+-- ╞════╪════════╡
+-- │ 11 │ Maegan │
+-- ╰────┴────────╯
+
+
+-- Get information about currect address of package.
+SELECT *
+FROM "addresses"
+WHERE "id" = 7432;
+-- Output :
+-- ╭──────┬────────────────────────┬───────────╮
+-- │  id  │        address         │   type    │
+-- ╞══════╪════════════════════════╪═══════════╡
+-- │ 7432 │ 950 Brannon Harris Way │ Warehouse │
+-- ╰──────┴────────────────────────┴───────────╯
+
+-- Conclusion : 
+-- The package has been dropped at a "Warehouse",
+-- at address "950 Brannon Harris Way". When
+-- writing this query, the package is not more
+-- are that address, has been picked from the "Warehouse",
+-- but has not reached another destination (sender) or
+-- grand-daughter.
