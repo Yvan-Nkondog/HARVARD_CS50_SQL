@@ -3,13 +3,18 @@
 -- municipality (identified by including “rural” in their name). 
 -- Ensure the view contains all of the columns from the census table.
 
--- Delete any view called rural.
+-- Delete any view named "rural".
 DROP VIEW IF EXISTS "rural";
 
+-- Create the required view.
 CREATE VIEW "rural" AS
 SELECT * 
 FROM "census"
 WHERE "locality" LIKE '% rural %';
 
--- Test : SELECT COUNT(*) FROM "rural"; -- Result : 461
--- Test : SELECT SUM("families") FROM "rural"; -- Result : 2229834
+-- Test : 
+-- SELECT COUNT(*) FROM "rural"; 
+-- Result : 461
+-- Test : 
+-- SELECT SUM("families") FROM "rural"; 
+-- Result : 2229834
