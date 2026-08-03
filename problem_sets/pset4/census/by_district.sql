@@ -26,5 +26,12 @@ FROM "census"
 GROUP BY "district";
 
 -- Test :
--- SELECT * FROM "by_district";
--- Mustang district : 3 751 families
+-- SELECT * FROM "by_district" ORDER BY families ASC;
+-- ╭──────────────────┬──────────┬────────────┬────────────┬─────────┬────────╮
+-- │     district     │ families │ households │ population │  male   │ female │
+-- ╞══════════════════╪══════════╪════════════╪════════════╪═════════╪════════╡
+-- │ Manang           │     1545 │       1447 │       4925 │    2547 │   2378 │
+-- │ Mustang          │     3751 │       3268 │      14596 │    8174 │   6422 │
+-- │ ...              │     ...  │       ...  │      ...   │    ...  │   ...  │
+
+-- Mustang : 3751 families
