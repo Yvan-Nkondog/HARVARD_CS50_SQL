@@ -12,10 +12,6 @@
 
 -- Uses snap.db
 
-SELECT * FROM "friends" LIMIT 1;
-SELECT * FROM "messages" LIMIT 1;
-SELECT * FROM "users" LIMIT 1;
-
 
 -- Delete existing index.
 DROP INDEX IF EXISTS "search_messages_by_from_user_id";
@@ -25,8 +21,7 @@ CREATE INDEX "search_messages_by_from_user_id"
 ON "messages"("from_user_id");
 
 -- Execute the query
-SELECT 
-    "to_user_id"
+SELECT "to_user_id"
 FROM "messages"
 WHERE "from_user_id" = (
     SELECT "id"
@@ -39,8 +34,7 @@ ORDER BY COUNT("to_user_id") DESC;
 
 -- Explain the query plan
 EXPLAIN QUERY PLAN
-SELECT 
-    "to_user_id"
+SELECT "to_user_id"
 FROM "messages"
 WHERE "from_user_id" = (
     SELECT "id"
