@@ -1,0 +1,57 @@
+-- For any two users, the app needs to quickly show 
+-- a list of the friends they have in common. Given two 
+-- usernames, lovelytrust487 and exceptionalinspiration482, 
+-- find the user IDs of their mutual friends. A mutual friend 
+-- is a user that both lovelytrust487 and exceptionalinspiration482 
+-- count among their friends.
+
+--      Ensure your query uses the index automatically created on 
+--      primary key columns of the friends table. This index is called 
+--      sqlite_autoindex_friends_1.
+
+-- Uses snap.db
+
+
+SELECT * FROM "friends" LIMIT 1;
+SELECT * FROM "messages" LIMIT 1;
+SELECT * FROM "users" LIMIT 1;
+
+-- Execute the query
+SELECT "friend_id"
+FROM "friends"
+WHERE "user_id" = (
+    SELECT "id"
+    FROM "users"
+    WHERE "username" = 'lovelytrust487'
+)
+
+INTERSECT
+
+SELECT "friend_id"
+FROM "friends"
+WHERE "user_id" = (
+    SELECT "id"
+    FROM "users"
+    WHERE "username" = 'exceptionalinspiration482'
+);
+
+
+-- Explain the query plan
+EXPLAIN QUERY PLAN
+SELECT "friend_id"
+FROM "friends"
+WHERE "user_id" = (
+    SELECT "id"
+    FROM "users"
+    WHERE "username" = 'lovelytrust487'
+)
+
+INTERSECT
+
+SELECT "friend_id"
+FROM "friends"
+WHERE "user_id" = (
+    SELECT "id"
+    FROM "users"
+    WHERE "username" = 'exceptionalinspiration482'
+);
