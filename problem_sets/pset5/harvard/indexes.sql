@@ -1,12 +1,3 @@
-
-
-SELECT * FROM "courses" LIMIT 1;
-SELECT * FROM "enrollments" LIMIT 1;
-SELECT * FROM "requirements" LIMIT 1;
-SELECT * FROM "satisfies" LIMIT 1;
-SELECT * FROM "students" LIMIT 1;
-
-
 -- The optimization for this question is going to be
 -- handled using typical queries given in the questions.
 
