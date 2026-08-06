@@ -1,3 +1,3 @@
 ## Link to detailed description of the exercise : 
 
-https://cs50.harvard.edu/sql/psets/5/your.harvard/
+https://cs50.harvard.edu/sql/psets/6/deep/
