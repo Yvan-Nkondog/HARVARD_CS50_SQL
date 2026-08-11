@@ -55,7 +55,8 @@ CREATE TABLE "students" (
     "department_id" INTEGER,
     "email" TEXT NOT NULL UNIQUE
         CHECK("email" LIKE '_%@_%._%'),
-    PRIMARY KEY("id")
+    PRIMARY KEY("id"),
+    FOREIGN KEY("department_id") REFERENCES "departments"("id") ON DELETE CASCADE
 );
 
 -- Table realising the link between students and courses
