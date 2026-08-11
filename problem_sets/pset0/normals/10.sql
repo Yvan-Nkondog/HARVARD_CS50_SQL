@@ -6,3 +6,5 @@
 
 -- Uses normals.db
 
+SELECT COUNT (DISTINCT ("latitude")) FROM "normals";
+-- Returned value 168 (one row and one column).
