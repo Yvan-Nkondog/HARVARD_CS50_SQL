@@ -2,7 +2,7 @@
 
 By Yvan Nkondog
 
-Video overview: <URL HERE>
+Video overview: <[URL HERE](https://github.com/Yvan-Nkondog/HARVARD_CS50_SQL/raw/refs/heads/main/project/CS50_SQL_Final_Project_Overview.odp)>
 
 ## Scope
 
